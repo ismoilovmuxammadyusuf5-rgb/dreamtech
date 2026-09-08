@@ -2,133 +2,149 @@
 <html lang="uz">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>DreamTech — Blueprint Constructor</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>DreamTech Blueprint Constructor</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#07111f;color:#eef7ff;font-family:system-ui,Arial,sans-serif}
-header{height:64px;background:#0b192b;border-bottom:1px solid #203650;display:flex;align-items:center;justify-content:space-between;padding:0 16px}
-.brand{font-size:22px;font-weight:800}.brand span{color:#39a8ff}.sub{font-size:12px;color:#9eb2c9;margin-left:12px}
-button{border:0;border-radius:9px;padding:10px 13px;background:#172b43;color:#fff;font-weight:650;cursor:pointer}
-button:hover{filter:brightness(1.15)}.primary{background:#0d83ee}.danger{background:#4a2430}
-.layout{display:grid;grid-template-columns:250px minmax(0,1fr) 300px;height:calc(100vh - 64px)}
-.left,.right{background:#091727;padding:12px;overflow:auto}.left{border-right:1px solid #203650}.right{border-left:1px solid #203650}
-.section{background:#0e1e31;border:1px solid #203b59;border-radius:12px;padding:10px;margin-bottom:10px}.section h3{font-size:13px;margin:0 0 9px}
-.nav button{width:100%;text-align:left;margin:3px 0}.nav .active{background:#0e6fca}
-.viewgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px}.viewgrid button.active{outline:2px solid #39a8ff}
-.stage{background:#050c15;overflow:auto;padding:14px}.blueprint{min-width:720px;max-width:1100px;margin:auto;background:#07182a;border:1px solid #173b5d;border-radius:14px;padding:12px}
-.bphead{display:flex;justify-content:space-between;color:#79c7ff;font-size:12px;margin-bottom:8px}.views{display:grid;grid-template-columns:1fr 1fr;gap:10px}.panel{background:#061323;border:1px solid #173b5d;border-radius:10px;padding:6px}.panel.side{grid-column:1/3}.panel h4{margin:0 0 2px;font-size:11px;color:#9ed8ff}
-svg{width:100%;height:auto;display:block}.outline{fill:none;stroke:#d9f1ff;stroke-width:2}.thin{fill:none;stroke:#4ca9e8;stroke-width:1}.dim{fill:none;stroke:#4ca9e8;stroke-width:1}.txt{fill:#73c6ff;font-size:11px;font-family:system-ui}.ghost{fill:#0b263e;stroke:#2e83bd;stroke-width:1}.part{cursor:pointer}.part.selected{stroke:#fff;stroke-width:3}.handle{fill:#fff;stroke:#008cff;stroke-width:2;cursor:ew-resize}
-.row{display:flex;gap:6px}.row>*{flex:1}label{font-size:11px;color:#9eb2c9;display:block;margin:5px 0 3px}
-input,select{width:100%;padding:8px;background:#071321;color:#fff;border:1px solid #294762;border-radius:7px}
-.quick button{width:100%;margin:3px 0;text-align:left}.small{font-size:11px;color:#91a9c0;line-height:1.4}
-.badge{display:inline-block;padding:3px 7px;border-radius:20px;background:#12324d;color:#7dccff;font-size:10px}
-@media(max-width:900px){.layout{grid-template-columns:1fr;height:auto}.left,.right{border:0}.stage{order:-1;height:68vh}.blueprint{min-width:680px}}
+*{box-sizing:border-box}body{margin:0;background:#06101c;color:#eaf6ff;font-family:Arial,system-ui,sans-serif}
+header{height:58px;background:#091a2d;border-bottom:1px solid #21405e;display:flex;align-items:center;justify-content:space-between;padding:0 12px;position:sticky;top:0;z-index:5}
+.logo{font-weight:800;font-size:20px}.logo b{color:#20a0ff}.tag{color:#8ca8c0;font-size:11px;margin-left:10px}
+button{border:1px solid #234764;background:#102943;color:#eaf6ff;border-radius:9px;padding:9px 11px;font-weight:700}
+.primary{background:#087fe7;border-color:#1594ff}.iconbtn{padding:8px 10px}
+.app{display:grid;grid-template-columns:220px minmax(0,1fr) 285px;min-height:calc(100vh - 58px)}
+.left,.right{background:#091827;padding:10px;overflow:auto}.left{border-right:1px solid #203c57}.right{border-left:1px solid #203c57}
+.card{background:#0d2034;border:1px solid #21415e;border-radius:11px;padding:10px;margin-bottom:9px}.card h3{font-size:12px;margin:0 0 8px;color:#cdeaff}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:5px}.tabs button{font-size:11px}.tabs .on{outline:2px solid #1594ff;background:#0d5f9e}
+.tool{width:100%;text-align:left;margin:3px 0}.tool.on{background:#087fe7}
+.quick button{width:100%;margin:3px 0;text-align:left;font-size:11px}
+.stage{padding:10px;background:#040b13;overflow:auto}.blue{background:#06182a;border:1px solid #174262;border-radius:12px;padding:9px;min-width:650px}
+.titlebar{display:flex;justify-content:space-between;font-size:11px;color:#72c8ff;margin-bottom:7px}
+.views{display:grid;grid-template-columns:1fr 1fr;gap:8px}.view{background:#071323;border:1px solid #1b3b58;border-radius:9px;padding:5px}.view h4{font-size:10px;color:#9edbff;margin:0 0 3px}.view.side{grid-column:1/3}
+svg{display:block;width:100%;height:auto;background:repeating-linear-gradient(0deg,transparent,transparent 19px,rgba(30,120,190,.08) 20px),repeating-linear-gradient(90deg,transparent,transparent 19px,rgba(30,120,190,.08) 20px)}
+.line{fill:none;stroke:#dcefff;stroke-width:2}.fine{fill:none;stroke:#4da8df;stroke-width:1}.dash{fill:none;stroke:#4da8df;stroke-width:1;stroke-dasharray:5 4}.glass{fill:#0b2b45;stroke:#9cddff;stroke-width:1.5}.dark{fill:#07101a;stroke:#6bbce9;stroke-width:1}.dim{fill:#58b9ef;font-size:10px;font-family:Arial}.part{cursor:pointer}.selected{stroke:#fff!important;stroke-width:3!important}
+input,select{width:100%;background:#06121f;border:1px solid #284a65;color:#fff;border-radius:7px;padding:8px}label{font-size:10px;color:#91abc0;display:block;margin:5px 0 3px}.row{display:flex;gap:6px}.row>div{flex:1}.hint{font-size:10px;line-height:1.45;color:#91abc0}
+.mobileViews{display:none}
+@media(max-width:850px){
+ header{height:54px}.tag{display:none}.app{display:block;min-height:0}.left{display:none}.right{border:0;padding:8px}.stage{height:auto;padding:7px}.blue{min-width:0;padding:6px}.views{display:block}.view{display:none}.view.activeMobile{display:block}.view.side{grid-column:auto}.mobileViews{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:7px}.mobileViews button{font-size:10px;padding:9px 4px}.right .card:nth-child(1){display:none}.right{display:grid;grid-template-columns:1fr 1fr;gap:7px}.right .card{margin:0}.right .card.ai,.right .card:last-child{grid-column:1/3}.stage{overflow:visible}
+}
 </style>
 </head>
 <body>
-<header><div><span class="brand"><span>◈</span> DreamTech</span><span class="sub">Tasavvuringni texnikaga aylantir.</span></div><div><button id="save">💾 Saqlash</button> <button class="primary" id="make3d">🧊 3D model</button></div></header>
-<div class="layout">
+<header>
+<div><span class="logo"><b>◈</b> DreamTech</span><span class="tag">Tasavvuringni texnikaga aylantir.</span></div>
+<div><button id="save">💾</button> <button class="primary" id="model">🧊 3D</button></div>
+</header>
+<div class="app">
 <aside class="left">
-<div class="section"><h3>📐 Ko‘rinishlar</h3><div class="viewgrid" id="views"></div></div>
-<div class="section nav"><h3>🧩 Tahrirlash</h3>
-<button class="active" data-tool="body">🚗 Kuzov</button><button data-tool="wheel">🛞 G‘ildirak</button><button data-tool="window">🪟 Oyna</button><button data-tool="light">💡 Faralar</button><button data-tool="spoiler">🪽 Spoiler</button>
+<div class="card"><h3>📐 Ko‘rinish</h3><div class="tabs" id="tabs"></div></div>
+<div class="card"><h3>🧩 Detalni tahrirlash</h3>
+<button class="tool on" data-tool="Kuzov">🚗 Kuzov</button>
+<button class="tool" data-tool="G‘ildirak">🛞 G‘ildirak</button>
+<button class="tool" data-tool="Oyna">🪟 Oyna</button>
+<button class="tool" data-tool="Fara">💡 Faralar</button>
+<button class="tool" data-tool="Spoiler">🪽 Spoiler</button>
 </div>
-<div class="section quick"><h3>⚡ Tez o‘zgarishlar</h3>
-<button data-q="longer">↔️ Kuzovni uzaytirish</button><button data-q="shorter">↔️ Kuzovni qisqartirish</button><button data-q="lower">↕️ Pastaytirish</button><button data-q="higher">↕️ Balandlatish</button><button data-q="wider">↔️ Kengaytirish</button><button data-q="narrower">↔️ Toraytirish</button>
+<div class="card quick"><h3>⚡ Tez o‘zgarish</h3>
+<button data-q="L+">↔️ Uzaytirish +100 mm</button><button data-q="L-">↔️ Qisqartirish −100 mm</button>
+<button data-q="H-">↕️ Pastaytirish −50 mm</button><button data-q="H+">↕️ Balandlatish +50 mm</button>
+<button data-q="W+">↔️ Kengaytirish +50 mm</button>
 </div>
-<div class="section"><h3>💡 Muhim</h3><div class="small">Bu yerda foydalanuvchi rasmni shunchaki tomosha qilmaydi — shablondagi parametrlarni o‘zgartiradi. O‘zgarishlar barcha tegishli ko‘rinishlarga qo‘llanadi.</div></div>
+<div class="card hint">Elementni chizmada bosing. Tanlangan detal oq chiziq bilan belgilanadi. O‘lchamlar o‘zgarsa, barcha mos ko‘rinishlar qayta chiziladi.</div>
 </aside>
 
 <main class="stage">
-<div class="blueprint">
-<div class="bphead"><span>CAR BLUEPRINT / EDIT MODE</span><span class="badge" id="mode">Kuzov</span></div>
+<div class="blue">
+<div class="titlebar"><span>CAR BLUEPRINT / EDIT MODE</span><span id="sel">Kuzov</span></div>
 <div class="views">
-<div class="panel"><h4>OLDI KO‘RINISH</h4><svg id="front" viewBox="0 0 420 210"></svg></div>
-<div class="panel"><h4>ORQA KO‘RINISH</h4><svg id="rear" viewBox="0 0 420 210"></svg></div>
-<div class="panel side"><h4>YON KO‘RINISH — CHAP / O‘NG</h4><svg id="side" viewBox="0 0 900 280"></svg></div>
-<div class="panel"><h4>TEPA KO‘RINISH</h4><svg id="top" viewBox="0 0 420 260"></svg></div>
-<div class="panel"><h4>PASTKI KO‘RINISH</h4><svg id="bottom" viewBox="0 0 420 260"></svg></div>
+<div class="view activeMobile" id="v-front"><h4>OLDI KO‘RINISH</h4><svg id="front" viewBox="0 0 520 290"></svg></div>
+<div class="view" id="v-rear"><h4>ORQA KO‘RINISH</h4><svg id="rear" viewBox="0 0 520 290"></svg></div>
+<div class="view side" id="v-side"><h4>YON KO‘RINISH</h4><svg id="side" viewBox="0 0 1000 330"></svg></div>
+<div class="view" id="v-top"><h4>TEPA KO‘RINISH</h4><svg id="top" viewBox="0 0 520 300"></svg></div>
+<div class="view" id="v-bottom"><h4>PASTKI KO‘RINISH</h4><svg id="bottom" viewBox="0 0 520 300"></svg></div>
 </div>
+<div class="mobileViews" id="mobileTabs"></div>
 </div>
 </main>
 
 <aside class="right">
-<div class="section"><h3>📏 Aniq o‘lchamlar</h3>
-<div class="row"><div><label>Uzunlik (mm)</label><input id="L" type="number" value="4800"></div><div><label>Kenglik</label><input id="W" type="number" value="2005"></div></div>
+<div class="card"><h3>📏 Aniq o‘lchamlar</h3>
+<div class="row"><div><label>Uzunlik</label><input id="L" type="number" value="4800"></div><div><label>Kenglik</label><input id="W" type="number" value="2005"></div></div>
 <div class="row"><div><label>Balandlik</label><input id="H" type="number" value="1420"></div><div><label>G‘ildirak bazasi</label><input id="WB" type="number" value="2760"></div></div>
-<div class="row"><div><label>Oldi qism</label><input id="frontOver" type="number" value="920"></div><div><label>Orqa qism</label><input id="rearOver" type="number" value="1120"></div></div>
-<div><label>G‘ildirak diametri</label><input id="wheel" type="number" value="680"></div>
+<div class="row"><div><label>Oldi qism</label><input id="FO" type="number" value="920"></div><div><label>Orqa qism</label><input id="RO" type="number" value="1120"></div></div>
+<label>G‘ildirak diametri</label><input id="D" type="number" value="680">
 </div>
-<div class="section"><h3>🧩 Tanlangan detal</h3>
-<div id="selectedText" class="small">Kuzov tanlangan. Chizmada elementni bosing.</div>
-<div class="row"><div><label>Detal eni (%)</label><input id="detailW" type="number" value="100"></div><div><label>Detal bo‘yi (%)</label><input id="detailH" type="number" value="100"></div></div>
-<div class="row"><div><label>X</label><input id="detailX" type="number" value="0"></div><div><label>Y</label><input id="detailY" type="number" value="0"></div></div>
-</div>
-<div class="section"><h3>🎨 Ko‘rinish</h3><div class="row"><button data-color="#d9f1ff">Oq</button><button data-color="#55b9ff">Ko‘k</button><button data-color="#ff6b6b">Qizil</button></div><div class="row" style="margin-top:6px"><button data-color="#8e9aa8">Kulrang</button><button data-color="#111827">Qora</button></div></div>
-<div class="section"><h3>🧠 AI yordamchi</h3><input id="ai" placeholder="Masalan: kuzovni 15 sm uzaytir"><button class="primary" id="ask" style="width:100%;margin-top:6px">Bajarish</button><div id="status" class="small" style="margin-top:7px">Tayyor.</div></div>
-<div class="section"><button class="primary" id="export" style="width:100%">📤 Chizmani saqlash</button></div>
+<div class="card"><h3>🎨 Rang</h3><div class="row"><button data-c="#dcefff">Oq</button><button data-c="#54b9ff">Ko‘k</button><button data-c="#e05252">Qizil</button></div><div class="row" style="margin-top:5px"><button data-c="#8c98a5">Kulrang</button><button data-c="#18202a">Qora</button></div></div>
+<div class="card"><h3>🧩 Tanlangan detal</h3><div class="hint" id="detail">Kuzov. Chizmadagi detalni tanlang.</div>
+<div class="row"><div><label>X</label><input id="DX" type="number" value="0"></div><div><label>Y</label><input id="DY" type="number" value="0"></div></div></div>
+<div class="card ai"><h3>🤖 AI yordamchi</h3><input id="ai" placeholder="“kuzovni 15 sm uzaytir”"><button class="primary" id="ask" style="width:100%;margin-top:6px">Bajarish</button><div class="hint" id="status">Tayyor.</div></div>
+<div class="card"><button class="primary" id="export" style="width:100%">📤 Chizma ma’lumotlarini saqlash</button></div>
 </aside>
 </div>
 
 <script>
-const S={L:4800,W:2005,H:1420,WB:2760,fo:920,ro:1120,wheel:680,tool:'body',view:0,color:'#d9f1ff',detail:null};
-const $=id=>document.getElementById(id);
-const names=['OLDI','ORQA','CHAP','O‘NG','TEPA','PAST'];
-names.forEach((n,i)=>{const b=document.createElement('button');b.textContent=n;b.onclick=()=>{S.view=i;document.querySelectorAll('#views button').forEach((x,j)=>x.classList.toggle('active',i===j));render()};$('views').appendChild(b)});$('views').firstChild.classList.add('active');
-function sync(){['L','W','H','WB','frontOver','rearOver','wheel'].forEach((id)=>{const el=$(id);el.value={L:S.L,W:S.W,H:S.H,WB:S.WB,frontOver:S.fo,rearOver:S.ro,wheel:S.wheel}[id]});}
-function read(){S.L=+$('L').value||4800;S.W=+$('W').value||2005;S.H=+$('H').value||1420;S.WB=+$('WB').value||2760;S.fo=+$('frontOver').value||920;S.ro=+$('rearOver').value||1120;S.wheel=+$('wheel').value||680;render()}
-['L','W','H','WB','frontOver','rearOver','wheel'].forEach(id=>$(id).oninput=read);
-document.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>{S.tool=b.dataset.tool;document.querySelectorAll('[data-tool]').forEach(x=>x.classList.remove('active'));b.classList.add('active');$('mode').textContent=b.textContent.replace(/^.. /,'');});
-document.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{const q=b.dataset.q,step=100;if(q==='longer'){S.L+=step}else if(q==='shorter'){S.L=Math.max(2500,S.L-step)}else if(q==='lower'){S.H=Math.max(900,S.H-50)}else if(q==='higher'){S.H+=50}else if(q==='wider'){S.W+=50}else if(q==='narrower'){S.W=Math.max(1200,S.W-50)}sync();render();});
-document.querySelectorAll('[data-color]').forEach(b=>b.onclick=()=>{S.color=b.dataset.color;render()});
-function svgEl(tag,a={}){const e=document.createElementNS('http://www.w3.org/2000/svg',tag);for(const k in a)e.setAttribute(k,a[k]);return e}
-function line(svg,x1,y1,x2,y2){svg.appendChild(svgEl('line',{x1,y1,x2,y2,class:'dim'}))}
-function text(svg,x,y,t){const e=svgEl('text',{x,y,class:'txt'});e.textContent=t;svg.appendChild(e)}
-function dimH(svg,x1,x2,y,t){line(svg,x1,y,x2,y);line(svg,x1,y-5,x1,y+5);line(svg,x2,y-5,x2,y+5);text(svg,(x1+x2)/2-24,y-6,t)}
-function dimV(svg,x,y1,y2,t){line(svg,x,y1,x,y2);line(svg,x-5,y1,x+5,y1);line(svg,x-5,y2,x+5,y2);text(svg,x+7,(y1+y2)/2,t)}
-function clickPart(e,name){e.classList.add('part');e.onclick=()=>{S.detail=name;$('selectedText').textContent='Tanlangan detal: '+name;render()};if(S.detail===name)e.classList.add('selected')}
-function renderFront(svg,back=false){
- svg.innerHTML='';const cx=210, scale=Math.min(330/S.W,130/S.H), w=S.W*scale,h=S.H*scale, x=cx-w/2,y=40+(130-h)/2;
- const body=svgEl('path',{d:`M ${x+18} ${y+h} Q ${x} ${y+h*.8} ${x+12} ${y+h*.2} Q ${x+w*.18} ${y} ${x+w*.82} ${y} Q ${x+w-12} ${y+h*.2} ${x+w-2} ${y+h*.8} Q ${x+w} ${y+h} ${x+w-18} ${y+h} Z`,class:'outline',fill:S.color});
- clickPart(body,'Kuzov');svg.appendChild(body);
- const win=svgEl('path',{d:`M ${x+w*.22} ${y+h*.18} Q ${cx} ${y+h*.03} ${x+w*.78} ${y+h*.18} L ${x+w*.68} ${y+h*.43} L ${x+w*.32} ${y+h*.43} Z`,class:'ghost'});clickPart(win,'Oyna');svg.appendChild(win);
- [x+w*.19,x+w*.81].forEach(wx=>{const c=svgEl('circle',{cx:wx,cy:y+h*.78,r:Math.max(11,S.wheel*scale/2),class:'ghost'});clickPart(c,'G‘ildirak');svg.appendChild(c)});
- if(!back){const l=svgEl('ellipse',{cx:x+w*.27,cy:y+h*.62,rx:18,ry:9,fill:S.color,class:'part'});clickPart(l,'Fara');svg.appendChild(l);const r=l.cloneNode();r.setAttribute('cx',x+w*.73);svg.appendChild(r)}
- dimH(svg,x,x+w,188,S.W+' mm');dimV(svg,385,y,y+h,S.H+' mm');
+const S={L:4800,W:2005,H:1420,WB:2760,FO:920,RO:1120,D:680,color:'#dcefff',tool:'Kuzov',selected:'Kuzov',mobile:0};
+const $=x=>document.getElementById(x), names=['OLDI','ORQA','YON','TEPA','PAST'], ids=['v-front','v-rear','v-side','v-top','v-bottom'];
+function mkTabs(){
+ names.forEach((n,i)=>{let b=document.createElement('button');b.textContent=n;b.onclick=()=>show(i);$('tabs').appendChild(b);let m=b.cloneNode(true);m.onclick=()=>show(i);$('mobileTabs').appendChild(m)});
 }
-function renderSide(svg,mirror=false){
- svg.innerHTML='';const x0=60,y0=55, scale=Math.min(760/S.L,155/S.H), L=S.L*scale,H=S.H*scale, wb=S.WB*scale, fo=S.fo*scale, ro=S.ro*scale;
- const front=x0+fo,rear=front+wb, end=rear+ro, base=y0+H*.78, roof=y0+H*.12;
- const d=`M ${x0} ${base} Q ${x0+10} ${base-45} ${front-25} ${base-58} L ${front+60} ${roof+35} Q ${front+160} ${roof} ${front+260} ${roof+5} Q ${rear-130} ${roof+3} ${rear+20} ${roof+45} L ${end-10} ${base-38} Q ${end} ${base-15} ${end} ${base} Z`;
- const body=svgEl('path',{d,class:'outline',fill:S.color});clickPart(body,'Kuzov');svg.appendChild(body);
- const cabin=svgEl('path',{d:`M ${front+35} ${base-58} L ${front+70} ${roof+38} Q ${front+170} ${roof+8} ${front+255} ${roof+12} Q ${rear-95} ${roof+14} ${rear-5} ${roof+52} L ${rear-5} ${base-55} Z`,class:'ghost'});clickPart(cabin,'Oyna');svg.appendChild(cabin);
- [front,rear].forEach(wx=>{const c=svgEl('circle',{cx:wx,cy:base,r:Math.max(18,S.wheel*scale/2),class:'ghost'});clickPart(c,'G‘ildirak');svg.appendChild(c)});
- const spoiler=svgEl('path',{d:`M ${end-55} ${base-52} L ${end+4} ${base-70} L ${end+4} ${base-55} L ${end-55} ${base-43}`,class:'outline'});clickPart(spoiler,'Spoiler');svg.appendChild(spoiler);
- dimH(svg,x0,end,245,S.L+' mm');dimH(svg,front,rear,225,S.WB+' mm');dimV(svg,25,y0,y0+H,S.H+' mm');text(svg,front-25,265,S.fo+' mm');text(svg,rear+15,265,S.ro+' mm');
+function show(i){S.mobile=i;document.querySelectorAll('.view').forEach((v,j)=>v.classList.toggle('activeMobile',j===i));document.querySelectorAll('#tabs button,#mobileTabs button').forEach((b,j)=>b.classList.toggle('on',j%5===i))}
+function sync(){[['L',S.L],['W',S.W],['H',S.H],['WB',S.WB],['FO',S.FO],['RO',S.RO],['D',S.D]].forEach(x=>$(x[0]).value=x[1])}
+function read(){S.L=+L.value||4800;S.W=+W.value||2005;S.H=+H.value||1420;S.WB=+WB.value||2760;S.FO=+FO.value||920;S.RO=+RO.value||1120;S.D=+D.value||680;render()}
+['L','W','H','WB','FO','RO','D'].forEach(id=>$(id).oninput=read);
+document.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>{S.tool=b.dataset.tool;document.querySelectorAll('[data-tool]').forEach(x=>x.classList.remove('on'));b.classList.add('on');$('sel').textContent=S.tool;$('detail').textContent=S.tool+' tanlangan.';render()});
+document.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{let q=b.dataset.q;if(q==='L+')S.L+=100;if(q==='L-')S.L=Math.max(2500,S.L-100);if(q==='H-')S.H=Math.max(900,S.H-50);if(q==='H+')S.H+=50;if(q==='W+')S.W+=50;sync();render()});
+document.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{S.color=b.dataset.c;render()});
+function E(t,a={}){let e=document.createElementNS('http://www.w3.org/2000/svg',t);for(let k in a)e.setAttribute(k,a[k]);return e}
+function add(svg,e,name){e.classList.add('part');e.onclick=()=>{S.selected=name;$('sel').textContent=name;$('detail').textContent=name+' tanlandi.';render()};if(S.selected===name)e.classList.add('selected');svg.appendChild(e)}
+function line(s,x1,y1,x2,y2,c='fine'){s.appendChild(E('line',{x1,y1,x2,y2,class:c}))}
+function txt(s,x,y,t){let e=E('text',{x,y,class:'dim'});e.textContent=t;s.appendChild(e)}
+function dh(s,x1,x2,y,t){line(s,x1,y,x2,y);line(s,x1,y-5,x1,y+5);line(s,x2,y-5,x2,y+5);txt(s,(x1+x2)/2-25,y-7,t)}
+function dv(s,x,y1,y2,t){line(s,x,y1,x,y2);line(s,x-5,y1,x+5,y1);line(s,x-5,y2,x+5,y2);txt(s,x+8,(y1+y2)/2,t)}
+function front(svg,back=false){
+ svg.innerHTML='';let cx=260, sc=Math.min(370/S.W,180/S.H),w=S.W*sc,h=S.H*sc,x=cx-w/2,y=30+(180-h)/2;
+ let body=E('path',{d:`M${x+15} ${y+h} Q${x} ${y+h*.78} ${x+14} ${y+h*.22} Q${x+w*.18} ${y} ${x+w*.82} ${y} Q${x+w-14} ${y+h*.22} ${x+w} ${y+h*.78} Q${x+w} ${y+h} ${x+w-15} ${y+h}Z`,class:'line',fill:S.color});add(svg,body,'Kuzov');
+ let glass=E('path',{d:`M${x+w*.2} ${y+h*.22} Q${cx} ${y+h*.03} ${x+w*.8} ${y+h*.22} L${x+w*.7} ${y+h*.43} L${x+w*.3} ${y+h*.43}Z`,class:'glass'});add(svg,glass,'Oyna');
+ [x+w*.22,x+w*.78].forEach(wx=>{let r=Math.max(18,S.D*sc/2);let c=E('circle',{cx:wx,cy:y+h*.79,r,class:'dark'});add(svg,c,'G‘ildirak')});
+ let grille=E('path',{d:`M${cx-32} ${y+h*.52} Q${cx} ${y+h*.42} ${cx+32} ${y+h*.52} L${cx+25} ${y+h*.66} L${cx-25} ${y+h*.66}Z`,class:'fine'});svg.appendChild(grille);
+ [cx-w*.3,cx+w*.3].forEach(wx=>{let l=E('ellipse',{cx:wx,cy:y+h*.57,rx:24,ry:11,class:'line',fill:S.color});add(svg,l,'Fara')});
+ line(svg,x+w*.14,y+h*.72,x+w*.86,y+h*.72,'dash');dh(svg,x,x+w,262,S.W+' mm');dv(svg,490,y,y+h,S.H+' mm');txt(svg,20,18,back?'REAR':'FRONT')
 }
-function renderTop(svg){
- svg.innerHTML='';const cx=210,scale=Math.min(330/S.L,170/S.W),L=S.L*scale,W=S.W*scale,x=cx-L/2,y=35;
- const d=`M ${x+18} ${y+W*.5} Q ${x} ${y+W*.18} ${x+35} ${y+10} Q ${x+L*.22} ${y} ${x+L*.5} ${y} Q ${x+L*.78} ${y} ${x+L-35} ${y+10} Q ${x+L} ${y+W*.18} ${x+L-18} ${y+W*.5} Q ${x+L} ${y+W*.82} ${x+L-35} ${y+W-10} Q ${x+L*.78} ${y+W} ${x+L*.5} ${y+W} Q ${x+L*.22} ${y+W} ${x+35} ${y+W-10} Q ${x} ${y+W*.82} ${x+18} ${y+W*.5} Z`;
- const body=svgEl('path',{d,class:'outline',fill:S.color});clickPart(body,'Kuzov');svg.appendChild(body);
- const cabin=svgEl('rect',{x:x+L*.28,y:y+W*.18,width:L*.44,height:W*.64,rx:18,class:'ghost'});clickPart(cabin,'Oyna');svg.appendChild(cabin);
- dimH(svg,x,x+L,235,S.L+' mm');dimV(svg,385,y,y+W,S.W+' mm');
+function side(svg){
+ svg.innerHTML='';let x0=45, sc=Math.min(820/S.L,190/S.H), L=S.L*sc,H=S.H*sc,fo=S.FO*sc,wb=S.WB*sc,ro=S.RO*sc;
+ let front=x0+fo,rear=front+wb,end=rear+ro,base=275,Hr=H*.72,roof=base-Hr*.78;
+ let d=`M${x0} ${base} Q${x0+8} ${base-38} ${front-18} ${base-48} L${front+45} ${roof+30} Q${front+135} ${roof} ${front+245} ${roof+7} Q${rear-120} ${roof+4} ${rear+8} ${roof+40} L${end-12} ${base-38} Q${end} ${base-18} ${end} ${base}Z`;
+ let body=E('path',{d,class:'line',fill:S.color});add(svg,body,'Kuzov');
+ let win=E('path',{d:`M${front+28} ${base-49} L${front+62} ${roof+34} Q${front+145} ${roof+8} ${front+230} ${roof+13} Q${rear-100} ${roof+14} ${rear-6} ${roof+46} L${rear-7} ${base-47}Z`,class:'glass'});add(svg,win,'Oyna');
+ [front,rear].forEach(wx=>{let c=E('circle',{cx:wx,cy:base,r:Math.max(25,S.D*sc/2),class:'dark'});add(svg,c,'G‘ildirak');line(svg,wx-16,base,wx+16,base,'fine');line(svg,wx,base-16,wx,base+16,'fine')});
+ let spoiler=E('path',{d:`M${end-65} ${base-48} L${end+4} ${base-67} L${end+4} ${base-52} L${end-60} ${base-38}`,class:'line'});add(svg,spoiler,'Spoiler');
+ line(svg,front+15,roof+48,rear-15,roof+48,'dash');line(svg,front+130,roof+5,front+125,base-45,'fine');line(svg,rear-85,roof+10,rear-82,base-45,'fine');
+ dh(svg,x0,end,312,S.L+' mm');dh(svg,front,rear,294,S.WB+' mm');dv(svg,20,base-Hr,base,S.H+' mm');txt(svg,front-25,327,S.FO+' mm');txt(svg,rear+8,327,S.RO+' mm')
 }
-function renderBottom(svg){
- svg.innerHTML='';const cx=210,scale=Math.min(330/S.L,170/S.W),L=S.L*scale,W=S.W*scale,x=cx-L/2,y=35;
- const r=svgEl('rect',{x,y,width:L,height:W,rx:25,class:'outline'});clickPart(r,'Kuzov');svg.appendChild(r);
- [x+S.fo*scale,x+(S.fo+S.WB)*scale].forEach(wx=>{[y+W*.2,y+W*.8].forEach(wy=>{const c=svgEl('circle',{cx:wx,cy:wy,r:Math.max(10,S.wheel*scale/2),class:'ghost'});clickPart(c,'G‘ildirak');svg.appendChild(c)})});
- dimH(svg,x,x+L,235,S.L+' mm');dimV(svg,385,y,y+W,S.W+' mm');
+function top(svg){
+ svg.innerHTML='';let cx=260,sc=Math.min(390/S.L,210/S.W),L=S.L*sc,W=S.W*sc,x=cx-L/2,y=25;
+ let d=`M${x+20} ${y+W/2} Q${x} ${y+W*.2} ${x+35} ${y+10} Q${x+L*.22} ${y} ${x+L/2} ${y} Q${x+L*.78} ${y} ${x+L-35} ${y+10} Q${x+L} ${y+W*.2} ${x+L-20} ${y+W/2} Q${x+L} ${y+W*.8} ${x+L-35} ${y+W-10} Q${x+L*.78} ${y+W} ${x+L/2} ${y+W} Q${x+L*.22} ${y+W} ${x+35} ${y+W-10} Q${x} ${y+W*.8} ${x+20} ${y+W/2}Z`;
+ let body=E('path',{d,class:'line',fill:S.color});add(svg,body,'Kuzov');
+ let cabin=E('path',{d:`M${x+L*.27} ${y+W*.18} Q${x+L*.5} ${y+W*.10} ${x+L*.73} ${y+W*.18} L${x+L*.68} ${y+W*.82} Q${x+L*.5} ${y+W*.9} ${x+L*.32} ${y+W*.82}Z`,class:'glass'});add(svg,cabin,'Oyna');
+ [x+S.FO*sc,x+(S.FO+S.WB)*sc].forEach(wx=>{[y+W*.17,y+W*.83].forEach(wy=>{let c=E('circle',{cx:wx,cy:wy,r:Math.max(12,S.D*sc/2),class:'dark'});add(svg,c,'G‘ildirak')})});
+ dh(svg,x,x+L,278,S.L+' mm');dv(svg,495,y,y+W,S.W+' mm')
 }
-function render(){renderFront($('front'),false);renderFront($('rear'),true);renderSide($('side'));renderTop($('top'));renderBottom($('bottom'));$('status').textContent='O‘zgarishlar barcha mos ko‘rinishlarda yangilandi.'}
-function applyAI(){
- const t=$('ai').value.toLowerCase();const m=t.match(/(\d+(?:\.\d+)?)\s*(sm|cm|mm)/);if(!m){$('status').textContent='Masalan: “kuzovni 15 sm uzaytir”.';return}
- const n=+m[1]*(m[2]==='mm'?1:m[2]==='sm'||m[2]==='cm'?10:1);
+function bottom(svg){
+ svg.innerHTML='';let cx=260,sc=Math.min(390/S.L,210/S.W),L=S.L*sc,W=S.W*sc,x=cx-L/2,y=25;
+ let r=E('rect',{x,y,width:L,height:W,rx:25,class:'line'});add(svg,r,'Kuzov');
+ [x+S.FO*sc,x+(S.FO+S.WB)*sc].forEach(wx=>{[y+W*.18,y+W*.82].forEach(wy=>{let c=E('circle',{cx:wx,cy:wy,r:Math.max(12,S.D*sc/2),class:'dark'});add(svg,c,'G‘ildirak')})});
+ line(svg,x+L*.5,y+8,x+L*.5,y+W-8,'dash');dh(svg,x,x+L,278,S.L+' mm');dv(svg,495,y,y+W,S.W+' mm')
+}
+function render(){front($('front'));front($('rear'),true);side($('side'));top($('top'));bottom($('bottom'))}
+function ai(){
+ let t=$('ai').value.toLowerCase(),m=t.match(/(\d+(?:\.\d+)?)\s*(mm|sm|cm|m)?/);if(!m){$('status').textContent='Masalan: kuzovni 15 sm uzaytir';return}
+ let n=+m[1]*(m[2]==='m'?1000:(m[2]==='sm'||m[2]==='cm'?10:1));
  if(t.includes('uzay'))S.L+=n;else if(t.includes('qisqart'))S.L=Math.max(2500,S.L-n);else if(t.includes('past'))S.H=Math.max(900,S.H-n);else if(t.includes('baland'))S.H+=n;else if(t.includes('keng'))S.W+=n;else if(t.includes('tor'))S.W=Math.max(1200,S.W-n);else{$('status').textContent='Buyruqni aniqroq yozing.';return}
- sync();render();$('status').textContent='AI buyrug‘i bajarildi: '+$('ai').value}
-$('ask').onclick=applyAI;
-$('save').onclick=()=>{localStorage.setItem('dreamtech_blueprint',JSON.stringify(S));$('status').textContent='Loyiha telefonda saqlandi.'};
-$('export').onclick=()=>{const data='DreamTech Blueprint\\nUzunlik: '+S.L+' mm\\nKenglik: '+S.W+' mm\\nBalandlik: '+S.H+' mm\\nG‘ildirak bazasi: '+S.WB+' mm';const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([data],{type:'text/plain'}));a.download='DreamTech_blueprint.txt';a.click()};
-$('make3d').onclick=()=>alert('Keyingi bosqich: shu 6 ta ko‘rinishdagi geometriyadan 3D model generatorini ulaymiz.');
-const saved=localStorage.getItem('dreamtech_blueprint');if(saved){try{Object.assign(S,JSON.parse(saved))}catch(e){}}sync();render();
+ sync();render();$('status').textContent='Bajarildi: '+$('ai').value
+}
+$('ask').onclick=ai;
+$('save').onclick=()=>{localStorage.setItem('dreamtech_v2',JSON.stringify(S));$('status').textContent='Loyiha telefonda saqlandi.'};
+$('export').onclick=()=>{let t=`DreamTech Blueprint\nUzunlik: ${S.L} mm\nKenglik: ${S.W} mm\nBalandlik: ${S.H} mm\nG‘ildirak bazasi: ${S.WB} mm\nOldi qism: ${S.FO} mm\nOrqa qism: ${S.RO} mm\nG‘ildirak: ${S.D} mm`;let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([t],{type:'text/plain'}));a.download='DreamTech_blueprint.txt';a.click()};
+$('model').onclick=()=>alert('3D bosqichi keyingi versiyada: 6 ta ko‘rinishdagi geometriyadan model quramiz.');
+const old=localStorage.getItem('dreamtech_v2');if(old)try{Object.assign(S,JSON.parse(old))}catch(e){}
+mkTabs();sync();render();show(0);
 </script>
 </body></html>
