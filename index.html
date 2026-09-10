@@ -88,7 +88,7 @@ function mkTabs(){
 }
 function show(i){S.mobile=i;document.querySelectorAll('.view').forEach((v,j)=>v.classList.toggle('activeMobile',j===i));document.querySelectorAll('#tabs button,#mobileTabs button').forEach((b,j)=>b.classList.toggle('on',j%5===i))}
 function sync(){[['L',S.L],['W',S.W],['H',S.H],['WB',S.WB],['FO',S.FO],['RO',S.RO],['D',S.D]].forEach(x=>$(x[0]).value=x[1])}
-function read(){S.L=+L.value||4800;S.W=+W.value||2005;S.H=+H.value||1420;S.WB=+WB.value||2760;S.FO=+FO.value||920;S.RO=+RO.value||1120;S.D=+D.value||680;render()}
+function read(){S.L=+$('L').value||4800;S.W=+$('W').value||2005;S.H=+$('H').value||1420;S.WB=+$('WB').value||2760;S.FO=+$('FO').value||920;S.RO=+$('RO').value||1120;S.D=+$('D').value||680;render()}
 ['L','W','H','WB','FO','RO','D'].forEach(id=>$(id).oninput=read);
 document.querySelectorAll('[data-tool]').forEach(b=>b.onclick=()=>{S.tool=b.dataset.tool;document.querySelectorAll('[data-tool]').forEach(x=>x.classList.remove('on'));b.classList.add('on');$('sel').textContent=S.tool;$('detail').textContent=S.tool+' tanlangan.';render()});
 document.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{let q=b.dataset.q;if(q==='L+')S.L+=100;if(q==='L-')S.L=Math.max(2500,S.L-100);if(q==='H-')S.H=Math.max(900,S.H-50);if(q==='H+')S.H+=50;if(q==='W+')S.W+=50;sync();render()});
